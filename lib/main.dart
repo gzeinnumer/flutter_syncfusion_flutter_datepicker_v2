@@ -29,7 +29,7 @@ class MyAppState extends State<MyApp> {
         _selectedDate = args.value.toString();
       } else if (args.value is List<DateTime>) {
         _dateCount = args.value.length.toString();
-        _selectedDate= "";
+        _selectedDate = "";
         for (var i = 0; i < args.value.length; i++) {
           _selectedDate = "$_selectedDate${DateFormat('yyyy-MM-dd').format(args.value[i])}, ";
         }
@@ -66,7 +66,10 @@ class MyAppState extends State<MyApp> {
                 ],
               ),
             ),
-            DatePicker(onSelectionChanged: _onSelectionChanged, disabledDate: const ["2023-01-26", "2023-01-27"]),
+            DatePickerV1(
+              onSelectionChanged: _onSelectionChanged,
+              disabledDate: const ["2023-01-26", "2023-01-27"],
+            ),
           ],
         ),
       ),
@@ -74,11 +77,12 @@ class MyAppState extends State<MyApp> {
   }
 }
 
-class DatePicker extends StatelessWidget {
+//https://help.syncfusion.com/flutter/daterangepicker/overview
+class DatePickerV1 extends StatelessWidget {
   void Function(DateRangePickerSelectionChangedArgs args) onSelectionChanged;
   List<String> disabledDate;
 
-  DatePicker({
+  DatePickerV1({
     Key? key,
     required this.onSelectionChanged,
     required this.disabledDate,
@@ -141,6 +145,10 @@ class DatePicker extends StatelessWidget {
           enablePastDates: false,
           onSelectionChanged: onSelectionChanged,
           selectionMode: DateRangePickerSelectionMode.multiple,
+          // selectionMode: DateRangePickerSelectionMode.single,
+          // selectionMode: DateRangePickerSelectionMode.extendableRange,
+          // selectionMode: DateRangePickerSelectionMode.range,
+          // selectionMode: DateRangePickerSelectionMode.multiRange,
           selectableDayPredicate: (DateTime date) {
             // return DateFormat('hh:mm:ss').format(dateTime);
             if (disabledDate.contains(DateFormat('yyyy-MM-dd').format(date))) {
