@@ -3,6 +3,10 @@
 |<img src="/preview/preview1.png" width="300"/>|
 |--|
 
+```
+syncfusion_flutter_datepicker: ^20.4.43
+```
+
 ```dart
 import 'package:flutter/material.dart';
 
